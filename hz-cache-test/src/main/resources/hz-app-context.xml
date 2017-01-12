@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hz="http://www.hazelcast.com/schema/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.hazelcast.com/schema/spring http://www.hazelcast.com/schema/spring/hazelcast-spring.xsd">
+
+	<hz:hazelcast id="hzInstance">
+		<hz:config>
+			<hz:group name="hz-test" password="hz-testpwd" />
+			<hz:network port="6001" port-auto-increment="false">
+				<hz:join>
+					<hz:multicast enabled="false"/>
+					<hz:tcp-ip enabled="true">
+						<hz:members>localhost</hz:members>
+					</hz:tcp-ip>
+				</hz:join>
+			</hz:network>
+			<hz:map name="personMap">
+				<hz:map-store initial-mode="EAGER" enabled="true" write-delay-seconds="0" implementation="personLoader"/>
+			</hz:map>
+			<hz:serialization>
+				<hz:serializers>
+					<hz:serializer type-class="com.anil.hzcachetest.key.PersonKey"
+						class-name="com.anil.hzcachetest.key.PersonKeySerializer"/>
+					<hz:serializer type-class="com.anil.hzcachetest.model.Person"
+						class-name="com.anil.hzcachetest.model.PersonSerializer"/>
+				</hz:serializers>
+			</hz:serialization>
+		</hz:config>
+	</hz:hazelcast>
+
+</beans>

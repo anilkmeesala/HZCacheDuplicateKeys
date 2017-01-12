@@ -1,0 +1,23 @@
+<hazelcast-client
+	xsi:schemaLocation="http://www.hazelcast.com/schema/client-config hazelcast-client-config.xsd"
+	xmlns="http://www.hazelcast.com/schema/client-config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<group>
+		<name>hz-test</name>
+		<password>hz-testpwd</password>
+	</group>
+
+	<network>
+		<cluster-members>
+			<address>localhost:6001</address>
+		</cluster-members>
+	</network>
+	<serialization>
+		<serializers>
+			<serializer type-class="com.anil.hzcachetest.key.PersonKey"
+				class-name="com.anil.hzcachetest.key.PersonKeySerializer" />
+			<serializer type-class="com.anil.hzcachetest.model.Person"
+						class-name="com.anil.hzcachetest.model.PersonSerializer"/>
+		</serializers>
+	</serialization>
+</hazelcast-client>
