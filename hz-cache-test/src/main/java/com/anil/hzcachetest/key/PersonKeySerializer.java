@@ -22,7 +22,7 @@ public class PersonKeySerializer implements StreamSerializer<PersonKey>{
 	public PersonKey read(ObjectDataInput in) throws IOException {
 		PersonKey pk =new PersonKey();
 		pk.setId(in.readUTF());
-		pk.setName(pk.getName());
+		pk.setName(in.readUTF());
 		return pk;
 	}
 
